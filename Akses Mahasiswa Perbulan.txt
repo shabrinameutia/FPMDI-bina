@@ -1,0 +1,92 @@
+import pyodbc
+import pandas as pd
+import matplotlib.pyplot as plt
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                      "Server=SHABRINAPC;"
+                      "Database=db_final;"
+                      "Trusted_Connection=yes;")
+cursor = conn.cursor()
+def i(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-1'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def ii(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-2'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def iii(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-3'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def iv(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-4'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def v(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-5'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def vi(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-6'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def vii(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-7'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def viii(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-8'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def il(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-9'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def l(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-10'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def li(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-11'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+def lii(conn):
+    sql = cursor.execute("select count(Mahasiswa) as jumlah from dbo.MHS where CONCAT(YEAR(tanggal),'-',MONTH(tanggal))  = '2018-12'")
+    result = sql.fetchall() 
+    for row in result:
+         return(row[0])
+
+
+i(conn)
+ii(conn)
+iii(conn)
+iv(conn)
+v(conn)
+vi(conn)
+vii(conn)
+viii(conn)
+il(conn)
+l(conn)
+li(conn)
+lii(conn)
+
+x = ['Jan', 'Feb', 'Mar', 'Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+y = [i(conn), ii(conn), iii(conn), iv(conn),v(conn), vi(conn),vii(conn),viii(conn),il(conn),l(conn),li(conn), lii(conn)]
+plt.bar(x,y, color = ['orange'])
+plt.xlabel('Jumlah Akses', fontsize=12)
+plt.ylabel('Tahun', fontsize=12)
+plt.title("Jumlah Akses Perbulan Mahasiswa yang mengakses shareITS Tahun 2018")
+
+plt.show()

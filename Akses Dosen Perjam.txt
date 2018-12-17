@@ -1,0 +1,22 @@
+import pyodbc 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                      "Server=SHABRINAPC;"
+                      "Database=db_final;"
+                      "Trusted_Connection=yes;")
+
+cursor = conn.cursor()
+sql = cursor.execute("select Distinct (Datepart(hh, waktu)) as Jam, count(Dosen) as Jumlah FROM dbo.Dosen group by DATEPART(hh, waktu) order by DATEPART(hh, waktu) asc")
+result = sql.fetchall() 
+
+df=pd.DataFrame([ij for ij in i] for i in result)
+df.rename(columns={0: 'Jam', 1:'Jumlah'}, inplace = True)
+x=df['Jam']
+y=df['Jumlah']
+plt.bar(x,y, color = ['pink'])
+plt.xlabel('Jam', fontsize=12)
+plt.ylabel('Jumlah Akses', fontsize=12)
+plt.title("Jumlah Akses Perjam Dosen yang mengakses shareITS")
+plt.show()

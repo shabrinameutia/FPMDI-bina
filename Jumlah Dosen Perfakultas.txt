@@ -1,0 +1,23 @@
+import pyodbc 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                      "Server=SHABRINAPC;"
+                      "Database=db_final;"
+                      "Trusted_Connection=yes;")
+
+cursor = conn.cursor()
+sql = cursor.execute("SELECT count (DISTINCT Dosen) as JumlahDosen, Fakultas FROM dbo.Dosen group by Fakultas")
+result = sql.fetchall() 
+
+df=pd.DataFrame([ij for ij in i] for i in result)
+df.rename(columns={0: 'JumlahDosen', 1:'Fakultas'}, inplace = True)
+print (df)
+y=df['JumlahDosen']
+x=df['Fakultas']
+plt.title ('Jumlah Dosen Per Fakultas')
+plt.barh(x,y)
+#plt.plot(x,y)
+#plt.scatter(x,y)
+plt.show()

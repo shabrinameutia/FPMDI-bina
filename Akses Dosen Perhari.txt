@@ -1,0 +1,24 @@
+import pyodbc 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+conn = pyodbc.connect("Driver={SQL Server};"
+                      "Server=SHABRINAPC;"
+                      "Database=db_final;"
+                      "Trusted_Connection=yes;")
+
+cursor = conn.cursor()
+sql = cursor.execute("select count(Dosen) as Jumlah, Last_access as Hari From dbo.Dosen where year(tanggal)=2018 group by Last_access")
+result = sql.fetchall() 
+
+df=pd.DataFrame([ij for ij in i] for i in result)
+df.rename(columns={0: 'Hari', 1:'Jumlah'}, inplace = True)
+y=df['Hari']
+x=df['Jumlah']
+plt.bar(x,y, color = ['Pink'])
+plt.xlabel('Hari', fontsize=12)
+plt.ylabel('Jumlah Akses', fontsize=12)
+plt.title("Jumlah Akses Perhari Dosen yang mengakses shareITS")
+
+
+plt.show()
